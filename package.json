@@ -20,7 +20,7 @@
     "mailchimp-api": "^2.0.7"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node ws_server.js",
     "dev": "export NODE_ENV=dev",
     "staging": "export NODE_ENV=staging",
     "production": "export NODE_ENV=production"
