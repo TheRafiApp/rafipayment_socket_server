@@ -56,7 +56,7 @@ function sendToClients(data, clients) {
 
 function handleIncoming(_data, socket) {
   sendMessage({
-    message: 'Data received'
+    message: 'Data received!'
   }, socket);
 
   let data = JSON.parse(_data);
