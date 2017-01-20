@@ -1,6 +1,6 @@
-# RafiPay Public Site Server
+# RafiPay Sockets Server
 
-Super simple node server to handle email inputs and send to the MailChimp API, saving to a mailing list.
+Websockets server to watch for deployments and alert users
 
 
 ## Running locally
@@ -19,4 +19,4 @@ pm2 start server.js
 
 ## Overview
 
-Uses a Webpack development server to run on `localhost:3001`.
+Uses a Webpack development server to run on `localhost:4200`.

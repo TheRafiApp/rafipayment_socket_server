@@ -1,45 +1,92 @@
-const express = require('express');
+'use strict';
+
+let ssl = false;
+if (['production', 'staging'].indexOf(process.env.NODE_ENV) !== -1) ssl = true;
+
+console.log(process.env)
+
 const fs = require('fs');
-const cors = require('cors');
-const mcapi = require('mailchimp-api');
-const bodyParser = require('body-parser')
+const engine = require('engine.io');
+const port = 4200;
 
-const app = express();
+let http_package;
+let options;
 
-app.set('port', (process.env.PORT || 3001));
+if (ssl) {
 
-// Express only serves static assets in production
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('client/build'));
-// }
+  console.log(process.env.NODE_ENV)
 
-app.use(cors())
-app.use(bodyParser.json())
+  console.log('trying ssl')
+  http_package = 'https';
 
-const mc = new mcapi.Mailchimp('ed3d1c577fb1a130d7e83b0df443b9c0-us11');
+  let domain = process.env.NODE_ENV === 'production' ?
+    'app.payment.rafiproperties.com' :
+    'app.staging.payment.rafiproperties.com'
 
-app.post('/', (req, res) => {
+  let root_path = '/etc/letsencrypt/live/';
+  let key_path =  `${root_path}${domain}/privkey.pem`;
+  let cert_path = `${root_path}${domain}/cert.pem`;
 
-  mc.lists.subscribe({id: 'b8bb9fbd61', email:{email:req.body.email}}, function(data) {
-      console.log(data)
-      res.json({ message: 'User subscribed successfully! Look for the confirmation email.' });
+  options = {
+    key: fs.readFileSync( key_path ),
+    cert: fs.readFileSync( cert_path )
+  }
+} else {
+  http_package = 'http';
+}
 
-    },
-    function(error) {
-      if (error.error) {
-        res.json({ error: error.error})
-      } else {
-        res.json({ error: 'There was an error subscribing that user' });
-      }
-    });
-});
+const http = require(http_package)
+  .createServer(options).listen(port);
 
-app.get('/', (req, res) => {
-  res.json({
-    'message': 'ok'
-  })
-})
+console.log(`Sockets server listening on port ${port}`)
+const server = engine.attach(http);
 
-app.listen(app.get('port'), () => {
-  console.log(`Find the server at: http://localhost:${app.get('port')}/`); // eslint-disable-line no-console
+let clients = [];
+
+function sendMessage(data, socket) {
+  socket.send(JSON.stringify(data))
+}
+
+function sendToClients(data, clients) {
+  for (var socket in clients) {
+    console.log(socket);
+    sendMessage(data, clients[socket]);
+  }
+}
+
+function handleIncoming(_data, socket) {
+  sendMessage({
+    message: 'Data received'
+  }, socket);
+
+  let data = JSON.parse(_data);
+  console.log(data);
+
+  if (data.event === 'deployment')
+    if (data.refresh === true)
+      sendToClients(data, clients)
+}
+
+function addClient(socket) {
+  clients[socket.id] = socket;
+}
+
+function removeClient(socket) {
+  delete clients[socket.id];
+}
+
+server.on('connection', function(socket) {
+  addClient(socket);
+  console.log(Object.keys(clients).length)
+
+  console.log(socket.remoteAddress)
+
+  socket.on('message', function(data){
+    handleIncoming(data, socket);
+  });
+
+  socket.on('close', function(){
+    console.log('closed')
+    removeClient(socket);
+  });
 });
