@@ -10,7 +10,7 @@ const engine = require('engine.io');
 const port = 4200;
 
 let http_package;
-let options; 
+let options;
 
 if (ssl) {
 
@@ -20,8 +20,8 @@ if (ssl) {
   http_package = 'https';
 
   let domain = process.env.NODE_ENV === 'production' ?
-    'app.payment.rafiproperties.com' :
-    'app.staging.payment.rafiproperties.com'
+    'payment.rafiproperties.com' :
+    'staging.payment.rafiproperties.com'
 
   let root_path = '/etc/letsencrypt/live/';
   let key_path =  `${root_path}${domain}/privkey.pem`;

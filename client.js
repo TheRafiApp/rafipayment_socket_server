@@ -1,5 +1,5 @@
 window.onload = function() {
-  var socket = require('engine.io-client')('ws://localhost:4200');
+  var socket = require('engine.io-client')('wss://staging.payment.rafiproperties.com:4200');
 
   socket.on('open', function(){
     console.log('opened ws')
