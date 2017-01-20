@@ -10,7 +10,7 @@ const engine = require('engine.io');
 const port = 4200;
 
 let http_package;
-let options;
+let options; 
 
 if (ssl) {
 
