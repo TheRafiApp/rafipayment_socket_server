@@ -3,7 +3,7 @@
 let ssl = false;
 if (['production', 'staging'].indexOf(process.env.NODE_ENV) !== -1) ssl = true;
 
-console.log(process.env)
+// console.log(process.env)
 
 const fs = require('fs');
 const engine = require('engine.io');
@@ -11,6 +11,8 @@ const port = 4200;
 
 let http_package;
 let options;
+
+console.log(process.env.NODE_ENV)
 
 if (ssl) {
 
