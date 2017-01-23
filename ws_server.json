@@ -1,0 +1,16 @@
+{
+  "apps" : [{
+    "name"        : "ws_server",
+    "script"      : "./ws_server.js",
+    "watch"       : true,
+    "env": {
+      "NODE_ENV": "development",
+    },
+    "env_staging" : {
+      "NODE_ENV": "staging"
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }]
+}
