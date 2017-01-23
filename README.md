@@ -11,10 +11,16 @@ npm start
 
 ## Running in production
 
-Follow this [example](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-14-04)
+Use application declaration, passing optional environment variables
 
 ```
-pm2 start ws_server.js
+pm2 start ws_server.json --env staging
+```
+
+Don't forget to save!
+
+```
+pm2 save
 ```
 
 ## Overview
