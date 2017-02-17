@@ -1,6 +1,6 @@
 {
   "name": "rafipay-public-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "babel": {
     "presets": [
@@ -21,12 +21,14 @@
     "fs": "0.0.2"
   },
   "scripts": {
-    "start": "node ws_server.js",
+    "start": "node main.js",
     "dev": "export NODE_ENV=dev",
     "staging": "export NODE_ENV=staging",
     "production": "export NODE_ENV=production"
   },
   "devDependencies": {
-    "browserify": "^13.3.0"
+    "browserify": "^13.3.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
   }
 }
