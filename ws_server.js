@@ -37,7 +37,7 @@ module.exports = function(options) {
     .createServer(ssl_options).listen(port);
 
   console.log(`Sockets server listening on port ${port}`)
-  console.log('test123')
+
   const server = engine.attach(http);
 
   let clients = [];
