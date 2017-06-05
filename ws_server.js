@@ -29,6 +29,7 @@ module.exports = function(options) {
       key: fs.readFileSync( key_path ),
       cert: fs.readFileSync( cert_path )
     }
+    console.log(ssl_options);
   } else {
     http_package = 'http';
   }
