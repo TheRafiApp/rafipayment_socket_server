@@ -18,8 +18,8 @@ module.exports = function(options) {
     http_package = 'https';
 
     let domain = process.env.NODE_ENV === 'production' ?
-      'payment.rafiproperties.com' :
-      'staging.payment.rafiproperties.com'
+      'app.payment.rafiproperties.com' :
+      'app.staging.payment.rafiproperties.com'
 
     let root_path = '/etc/letsencrypt/live/';
     let key_path =  `${root_path}${domain}/privkey.pem`;
@@ -29,7 +29,6 @@ module.exports = function(options) {
       key: fs.readFileSync( key_path ),
       cert: fs.readFileSync( cert_path )
     }
-    console.log(ssl_options);
   } else {
     http_package = 'http';
   }
