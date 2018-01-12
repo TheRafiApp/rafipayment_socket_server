@@ -9,9 +9,7 @@ services:
     ports:
       - 4200:4200
     volumes:
-      - .:/app
       - rafipayment_certificate_data:/etc/letsencrypt
-    command: tail -f /dev/null
 
 volumes:
   rafipayment_certificate_data:
