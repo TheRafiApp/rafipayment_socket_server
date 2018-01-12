@@ -7,8 +7,11 @@ RUN apt-get -y install npm
 
 RUN mkdir -p /app
 WORKDIR /app
-ADD . /app
+
+ADD package.json /app/
 RUN npm install
+
+ADD . /app
 
 EXPOSE 4200
 
