@@ -1,6 +1,6 @@
 # Rafipayment Websockets Server
 
-Websockets server to watch for deployments and alert users
+Websockets server to watch for deployments and alert users, built with node and [engine.io](https://github.com/socketio/engine.io)
 
 
 ## Running locally
@@ -25,4 +25,4 @@ pm2 save
 
 ## Overview
 
-Uses a Webpack development server to run on `localhost:4200`.
+Runs a node websockets server at `localhost:4200`.

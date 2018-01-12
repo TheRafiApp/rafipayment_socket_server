@@ -2,7 +2,8 @@ version: "3.0"
 services:
   sockets_server:
     build: .
-    container_name: 'socket_server'
+    image: rafipayment_socket_server
+    container_name: socket_server
     environment:
       - NODE_ENV=dev
     ports:
@@ -10,6 +11,7 @@ services:
     volumes:
       - .:/app
       - rafipayment_certificate_data:/etc/letsencrypt
+    command: tail -f /dev/null
 
 volumes:
   rafipayment_certificate_data:
