@@ -1,5 +1,8 @@
-FROM node:boron
-# FROM node:5.12.0 # no npm
+FROM node:latest
+
+RUN apt-get update
+
+RUN apt-get -y install npm
 
 RUN mkdir -p /app
 WORKDIR /app

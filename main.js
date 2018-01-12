@@ -1,4 +1,4 @@
 'use strict';
 
-const server = require('./ws_server');
-const SocketsServer = new server({ port: 4200 });
+const Server = require('./ws_server');
+const SocketsServer = new Server({ port: 4200 });
