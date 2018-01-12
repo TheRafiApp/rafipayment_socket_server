@@ -18,8 +18,8 @@ module.exports = function(options) {
     http_package = 'https'
 
     let domain = process.env.NODE_ENV === 'production' ?
-      'app.rafipayment.com' :
-      'app.staging.rafipayment.com'
+      'rafipayment.com' :
+      'staging.rafipayment.com'
 
     let root_path = '/etc/letsencrypt/live/'
     let key_path =  `${root_path}${domain}/privkey.pem`
