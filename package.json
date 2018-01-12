@@ -1,7 +1,6 @@
 {
-  "name": "rafipay-public-server",
-  "version": "0.1.1",
-  "private": true,
+  "name": "rafipayment-sockets-server",
+  "version": "0.2.0",
   "babel": {
     "presets": [
       "es2015",

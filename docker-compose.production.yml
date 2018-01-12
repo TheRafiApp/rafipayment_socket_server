@@ -3,6 +3,8 @@ services:
   sockets_server:
     build: .
     container_name: 'socket_server'
+    environment:
+      - NODE_ENV=production
     ports:
       - 4200:4200
     volumes:
