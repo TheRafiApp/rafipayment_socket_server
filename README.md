@@ -1,4 +1,4 @@
-# Rafipayment Sockets Server
+# Rafipayment Websockets Server
 
 Websockets server to watch for deployments and alert users
 

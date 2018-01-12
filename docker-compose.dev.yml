@@ -1,0 +1,22 @@
+version: "3.0"
+services:
+  sockets_server:
+    build: .
+    container_name: 'socket_server'
+    environment:
+      - NODE_ENV=dev
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/app
+      - rafipayment_certificate_data:/etc/letsencrypt
+
+volumes:
+  rafipayment_certificate_data:
+    external: true
+
+networks:
+  default:
+    external:
+      name: rafipayment_network
+
