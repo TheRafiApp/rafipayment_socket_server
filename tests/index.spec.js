@@ -34,7 +34,7 @@ afterAll(() => {
   server.close()
 })
 
-// jest.setTimeout(10000)
+jest.setTimeout(10000)
 
 describe('Rafi websockets server', async () => {
   it('should open the websockets connection', async () => {
@@ -47,9 +47,10 @@ describe('Rafi websockets server', async () => {
 
   // it('server should receive a message', async () => {
   //   expect.assertions(1)
-  //   await client.send(JSON.stringify({
+  //   client.send(JSON.stringify({
   //     test: 'test'
   //   }))
+  //   await sleep(500)
   //   expect(mockServerMessageCallback)
   //     .toBeCalledWith('test')
   // })
@@ -59,6 +60,7 @@ describe('Rafi websockets server', async () => {
   //   await server.sendToClients(JSON.stringify({
   //     test: 'test'
   //   }))
+  //   await sleep(500)
   //   expect(mockClientMessageCallback)
   //     .toBeCalledWith('test')
   // })

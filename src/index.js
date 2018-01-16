@@ -69,8 +69,8 @@ module.exports = class Server {
   }
 
   sendToClients(data) {
-    for (let socket of this.clients) {
-      this.sendMessage(data, socket)
+    for (let socket in this.clients) {
+      this.sendMessage(data, this.clients[socket])
     }
   }
 
