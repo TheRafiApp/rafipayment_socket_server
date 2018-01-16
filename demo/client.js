@@ -1,4 +1,5 @@
 const url = 'ws://localhost:4200'
+
 window.onload = () => {
   const $console = document.querySelector('.console pre')
   const socket = require('engine.io-client')(url)

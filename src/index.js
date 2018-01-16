@@ -53,8 +53,7 @@ module.exports = class Server {
   }
 
   removeClient(socket) {
-    const id = socket.id
-    delete this.clients[id]
+    delete this.clients[socket.id]
     log(chalk.magentaBright(`closed ${socket.remoteAddress}`))
   }
 
