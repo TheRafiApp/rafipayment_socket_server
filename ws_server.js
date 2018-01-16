@@ -58,11 +58,7 @@ module.exports = function(options) {
     let data = JSON.parse(_data)
     console.log(data)
 
-    if (data.event === 'deployment') {
-      if (data.refresh === true) {
-        sendToClients(data, clients)
-      }
-    }
+    sendToClients(data, clients)
   }
 
   function addClient(socket) {
