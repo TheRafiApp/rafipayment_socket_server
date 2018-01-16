@@ -1,20 +1,27 @@
 {
   "name": "rafipayment-sockets-server",
   "description": "Node websockets server for deployment alerts",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "repository": "https://github.com/TheRafiApp/rafipayment_socket_server",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.3.0",
     "cors": "^2.8.4",
     "engine.io": "^3.1.4"
   },
   "scripts": {
-    "start": "node main.js",
-    "test": "browserify tests/client.js -o tests/client.min.js"
+    "start": "node index.js",
+    "demo": "browserify demo/client.js -o demo/client.min.js"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
     "browserify": "^13.3.0",
     "engine.io-client": "^3.1.4",
-    "eslint": "^4.15.0"
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
   }
 }

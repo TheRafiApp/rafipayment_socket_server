@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+}
+.console {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #a3a3ae;
+  color: #bad7d2;
+  border-radius: 4px;
+}
+pre {
+  font-family: 'Monosten', Courier, monospace;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.actions .open-connection,
+.actions.closed .close-connection {
+  display: none;
+}
+
+.actions.closed .open-connection,
+.actions .close-connection {
+  display: block;
+}

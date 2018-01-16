@@ -6,6 +6,7 @@ services:
     container_name: socket_server
     environment:
       - NODE_ENV=dev
+      - FORCE_COLOR=1
     ports:
       - 4200:4200
     volumes:
