@@ -2,8 +2,9 @@ const env = process.env.NODE_ENV
 
 const chalk = require('chalk')
 const config = require('./config')[env]
-const ssl_options = require('./utils/ssl_options')()
-const format_obj = require('./utils/format_object')
+const utils = require('./utils')
+const ssl_options = utils.ssl_options()
+const format_obj = utils.format_object
 
 const log = console.log
 
@@ -38,6 +39,10 @@ module.exports = class Server {
         this.removeClient(socket)
       })
     })
+  }
+
+  on(event, callback) {
+    this.server.on(event, callback)
   }
 
   addClient(socket) {

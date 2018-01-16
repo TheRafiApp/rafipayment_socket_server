@@ -6,7 +6,7 @@ const config = require('../config')[env]
 
 const log = console.log
 
-module.exports = () => {
+module.exports.ssl_options = () => {
   const ssl = ['production', 'staging'].includes(env)
 
   if (ssl) {
@@ -21,4 +21,12 @@ module.exports = () => {
       cert: fs.readFileSync(cert_path)
     }
   }
+}
+
+module.exports.format_object = (data) => {
+  return JSON.stringify(data, null, 2)
+}
+
+module.exports.sleep = (duration) => {
+  return new Promise(resolve => setTimeout(() => resolve(), duration))
 }
