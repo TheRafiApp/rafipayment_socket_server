@@ -40,27 +40,6 @@ module.exports = class Server {
     })
   }
 
-  sendMessage(data, socket) {
-    socket.send(JSON.stringify(data))
-  }
-
-  sendToClients(data, clients) {
-    for (var socket in clients) {
-      this.sendMessage(data, clients[socket])
-    }
-  }
-
-  handleIncoming(_data, socket) {
-    this.sendMessage({
-      message: 'Data received!'
-    }, socket)
-
-    let data = JSON.parse(_data)
-    log(format_obj(data))
-
-    this.sendToClients(data, this.clients)
-  }
-
   addClient(socket) {
     this.clients[socket.id] = socket
 
@@ -72,5 +51,31 @@ module.exports = class Server {
     const id = socket.id
     delete this.clients[id]
     log(chalk.magentaBright(`closed ${socket.remoteAddress}`))
+  }
+
+  handleIncoming(_data, socket) {
+    this.sendMessage({
+      message: 'Data received!'
+    }, socket)
+
+    let data = JSON.parse(_data)
+    log(format_obj(data))
+
+    this.sendToClients(data)
+  }
+
+  sendToClients(data) {
+    for (let socket of this.clients) {
+      this.sendMessage(data, socket)
+    }
+  }
+
+  sendMessage(data, socket) {
+    socket.send(JSON.stringify(data))
+  }
+
+  close() {
+    this.server.close()
+    this.http.close()
   }
 }
