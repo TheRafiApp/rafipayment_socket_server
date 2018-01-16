@@ -41,20 +41,36 @@ module.exports = class Server {
     })
   }
 
+  get clients_count() {
+    return Object.keys(this.clients).length
+  }
+
   on(event, callback) {
     this.server.on(event, callback)
   }
 
   addClient(socket) {
     this.clients[socket.id] = socket
-
-    const length = Object.keys(this.clients).length
-    log(chalk`{blueBright Connected to ${socket.remoteAddress}, {magentaBright ${length}} clients total}`)
+    this.statusUpdate(socket)
   }
 
   removeClient(socket) {
     delete this.clients[socket.id]
-    log(chalk.magentaBright(`closed ${socket.remoteAddress}`))
+    this.statusUpdate(socket, true)
+  }
+
+  statusUpdate(socket, removed = false) {
+    const action = removed
+      ? 'Closed'
+      : 'Connected to'
+    const label = this.clients_count === 1
+      ? 'client'
+      : 'clients'
+    const count = this.clients_count
+    const addr = socket.remoteAddress
+    log(
+      chalk`{blueBright ${action} ${addr}, {magentaBright ${count}} ${label} connected}`
+    )
   }
 
   handleIncoming(_data, socket) {
