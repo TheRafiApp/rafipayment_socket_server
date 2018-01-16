@@ -17,13 +17,18 @@ module.exports = class Server {
   get clients_count() {
     return Object.keys(this.clients).length
   }
+  
+  on(event, callback) {
+    this.server.on(event, callback)
+  }
 
   init(options) {
     log(chalk`{blueBright Starting websockets server on port ${options.port}}`)
 
     this.port = options.port
     this.http = require(config.http_package)
-      .createServer(ssl_options).listen(this.port)
+      .createServer(ssl_options)
+      .listen(this.port)
     this.server = require('engine.io')(this.http)
 
     this.initEventListeners()
@@ -32,7 +37,7 @@ module.exports = class Server {
   }
 
   initEventListeners() {
-    this.server.on('connection', socket => {
+    this.on('connection', socket => {
       this.addClient(socket)
 
       socket.on('message', data => {
@@ -43,10 +48,6 @@ module.exports = class Server {
         this.removeClient(socket)
       })
     })
-  }
-
-  on(event, callback) {
-    this.server.on(event, callback)
   }
 
   addClient(socket) {
