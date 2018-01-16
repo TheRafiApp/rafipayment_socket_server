@@ -14,6 +14,10 @@ module.exports = class Server {
     this.init(options)
   }
 
+  get clients_count() {
+    return Object.keys(this.clients).length
+  }
+
   init(options) {
     log(chalk`{blueBright Starting websockets server on port ${options.port}}`)
 
@@ -39,10 +43,6 @@ module.exports = class Server {
         this.removeClient(socket)
       })
     })
-  }
-
-  get clients_count() {
-    return Object.keys(this.clients).length
   }
 
   on(event, callback) {
