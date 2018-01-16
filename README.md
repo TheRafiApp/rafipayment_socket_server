@@ -3,26 +3,22 @@
 Websockets server to watch for deployments and alert users, built with node and [engine.io](https://github.com/socketio/engine.io)
 
 
-## Running locally
+## Development
+
+It is possible to run using `export NODE_ENV=dev && npm start`, but better to run in Docker
 
 ```
-npm start
+docker-compose -f docker-compose.dev.yml up --build
 ```
 
-## Running in production
+## Deployment
 
-Use application declaration, passing optional environment variables
+Uses `post-receive` git hook to rebuild the container using `docker-compose`
 
-```
-pm2 start ws_server.json --env staging
-```
+## Tests
 
-Don't forget to save!
+Jest unit tests
 
 ```
-pm2 save
+npm test
 ```
-
-## Overview
-
-Runs a node websockets server at `localhost:4200`.
