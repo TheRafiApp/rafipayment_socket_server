@@ -1,8 +1,12 @@
 const env = process.env.NODE_ENV
 
 const chalk = require('chalk')
+const engine = require('engine.io')
+
 const config = require('./config')[env]
+const http_pkg = require(config.http_package)
 const utils = require('./utils')
+
 const ssl_options = utils.ssl_options()
 const format_obj = utils.format_object
 
@@ -26,10 +30,10 @@ module.exports = class Server {
     log(chalk`{blueBright Starting websockets server on port ${options.port}}`)
 
     this.port = options.port
-    this.http = require(config.http_package)
+    this.http = http_pkg
       .createServer(ssl_options)
       .listen(this.port)
-    this.server = require('engine.io')(this.http)
+    this.server = new Engine(this.http)
 
     this.initEventListeners()
 
