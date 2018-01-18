@@ -1,5 +1,9 @@
 # Rafipayment Websockets Server
 
+[![Coverage Status](https://coveralls.io/repos/github/TheRafiApp/rafipayment_socket_server/badge.svg?branch=master)](https://coveralls.io/github/TheRafiApp/rafipayment_socket_server?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+
 Websockets server to watch for deployments and alert users, built with node and [engine.io](https://github.com/socketio/engine.io)
 
 
