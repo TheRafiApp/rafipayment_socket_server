@@ -1,6 +1,11 @@
 const env = process.env.NODE_ENV
 
 const chalk = require('chalk')
+<<<<<<< Updated upstream
+=======
+const Engine = require('engine.io')
+
+>>>>>>> Stashed changes
 const config = require('./config')[env]
 const utils = require('./utils')
 const ssl_options = utils.ssl_options()
@@ -23,7 +28,9 @@ module.exports = class Server {
   }
 
   init(options) {
-    log(chalk`{blueBright Starting websockets server on port ${options.port}}`)
+    log(
+      chalk`{blueBright Starting websockets server on port ${options.port}}`
+    )
 
     this.port = options.port
     this.http = require(config.http_package)
@@ -33,7 +40,9 @@ module.exports = class Server {
 
     this.initEventListeners()
 
-    log(chalk`{greenBright Websockets server listening on port ${this.port}}`)
+    log(
+      chalk`{greenBright Websockets server listening on port ${this.port}}`
+    )
   }
 
   initEventListeners() {
@@ -80,7 +89,9 @@ module.exports = class Server {
     }, socket)
 
     let data = JSON.parse(_data)
-    log(format_obj(data))
+    log(
+      format_obj(data)
+    )
 
     this.sendToClients(data)
   }
