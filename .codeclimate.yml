@@ -1,0 +1,4 @@
+exclude_patterns:
+- "coverage/"
+- "git-hooks/"
+- "tests/"
