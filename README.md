@@ -1,5 +1,6 @@
 # Rafipayment Websockets Server
 
+[![Build](https://travis-ci.org/TheRafiApp/rafipayment_socket_server.svg?branch=master)](#)
 [![Coverage Status](https://coveralls.io/repos/github/TheRafiApp/rafipayment_socket_server/badge.svg?branch=master)](https://coveralls.io/github/TheRafiApp/rafipayment_socket_server?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
