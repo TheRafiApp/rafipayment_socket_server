@@ -17,7 +17,7 @@ module.exports = class Server {
   get clients_count() {
     return Object.keys(this.clients).length
   }
-  
+
   on(event, callback) {
     this.server.on(event, callback)
   }

@@ -25,5 +25,18 @@
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^22.1.1"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/coverage",
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules",
+      "<rootDir>/demo",
+      "<rootDir>/git-hooks"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ]
   }
 }

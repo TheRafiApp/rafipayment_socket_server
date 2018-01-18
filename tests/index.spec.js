@@ -6,16 +6,17 @@ const sleep = require('../src/utils').sleep
 const Server = require('../src')
 
 const port = config.port
+const delay = 100
 
 const server = new Server({ port })
 const client = engine_client(`ws://localhost:${port}`)
 
-// const mockServerOpenCallback = jest.fn()
+const mockServerOpenCallback = jest.fn()
 const mockServerMessageCallback = jest.fn()
 const mockServerCloseCallback = jest.fn()
 
+server.on('connection', mockServerOpenCallback)
 server.on('connection', socket => {
-  // console.log('server connected!')
   socket.on('message', mockServerMessageCallback)
   socket.on('close', mockServerCloseCallback)
 })
@@ -34,34 +35,41 @@ afterAll(() => {
   server.close()
 })
 
-jest.setTimeout(10000)
+// jest.setTimeout(10000)
 
 describe('Rafi websockets server', async () => {
-  it('should open the websockets connection', async () => {
+  it('should fire the server open callback', async () => {
     expect.assertions(1)
-    await sleep(1000) // make sure the server started
-    await client.open()
+    await sleep(delay)
+    expect(mockServerOpenCallback)
+      .toBeCalled()
+  })
+  it('should fire the client open callback', async () => {
+    expect.assertions(1)
+    await sleep(delay)
     expect(mockClientOpenCallback)
       .toBeCalled()
   })
 
-  // it('server should receive a message', async () => {
-  //   expect.assertions(1)
-  //   client.send(JSON.stringify({
-  //     test: 'test'
-  //   }))
-  //   await sleep(500)
-  //   expect(mockServerMessageCallback)
-  //     .toBeCalledWith('test')
-  // })
+  it('server should receive a message from client', async () => {
+    expect.assertions(1)
+    const data = JSON.stringify({
+      test: 'test'
+    })
+    client.send(data)
+    await sleep(delay)
+    expect(mockServerMessageCallback)
+      .toBeCalledWith(data)
+  })
 
-  // it('client should receive a message', async () => {
-  //   expect.assertions(1)
-  //   await server.sendToClients(JSON.stringify({
-  //     test: 'test'
-  //   }))
-  //   await sleep(500)
-  //   expect(mockClientMessageCallback)
-  //     .toBeCalledWith('test')
-  // })
+  it('client should receive a message from server', async () => {
+    expect.assertions(1)
+    const data = JSON.stringify({
+      test: 'test'
+    })
+    await server.sendToClients(data)
+    await sleep(delay)
+    expect(mockClientMessageCallback)
+      .toBeCalledWith(data)
+  })
 })
