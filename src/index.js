@@ -99,6 +99,9 @@ module.exports = class Server {
     for (let socket in this.clients) {
       this.sendMessage(data, this.clients[socket])
     }
+    log(
+      chalk`{blueBright Sent message to {magentaBright ${this.clients_count}} clients}`
+    )
   }
 
   sendMessage(data, socket) {
