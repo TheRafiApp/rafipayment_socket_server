@@ -12,6 +12,8 @@ const format_obj = utils.format_object
 
 const log = console.log
 
+log(ssl_options)
+
 module.exports = class Server {
   constructor(options) {
     this.clients = []
