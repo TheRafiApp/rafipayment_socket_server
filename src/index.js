@@ -8,7 +8,7 @@ const config = require('./config')[env]
 const http_pkg = require(config.http_package)
 const utils = require('./utils')
 
-const secret = require('../secret.json').key
+const secret = require('../deployment_secret.json').key
 
 const ssl_options = utils.ssl_options()
 const format_obj = utils.format_object

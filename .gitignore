@@ -6,4 +6,4 @@ npm-debug.log
 
 /coverage/
 
-secret.json
+/deployment_secret.json
