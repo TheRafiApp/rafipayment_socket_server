@@ -1,5 +1,5 @@
 // const url = 'ws://localhost:4200'
-const url = 'ws://staging.rafipayment.com:4200'
+const url = 'wss://staging.rafipayment.com:4200'
 
 window.onload = () => {
   const $console = document.querySelector('.console pre')

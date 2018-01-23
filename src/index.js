@@ -1,5 +1,6 @@
 const env = process.env.NODE_ENV
 
+const crypto = require('crypto')
 const chalk = require('chalk')
 const Engine = require('engine.io')
 
@@ -7,12 +8,18 @@ const config = require('./config')[env]
 const http_pkg = require(config.http_package)
 const utils = require('./utils')
 
+const secret = require('../secret.json').key
+
 const ssl_options = utils.ssl_options()
 const format_obj = utils.format_object
 
 const log = console.log
 
-log(ssl_options)
+log(config.http_package, ssl_options)
+
+const key = crypto.createHmac('sha256', secret).digest('hex')
+
+console.log(key)
 
 module.exports = class Server {
   constructor(options) {
