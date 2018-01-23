@@ -8,12 +8,12 @@ module.exports = {
     port: 4200
   },
   staging: {
-    domain: 'ws.staging.rafipayment.com',
+    domain: 'staging.rafipayment.com',
     http_package: 'https',
     port: 4200
   },
   production: {
-    domain: 'ws.rafipayment.com',
+    domain: 'rafipayment.com',
     http_package: 'https',
     port: 4200
   }
