@@ -9,7 +9,7 @@ module.exports = {
   },
   staging: {
     domain: 'staging.rafipayment.com',
-    http_package: 'https',
+    http_package: 'http',
     port: 4200
   },
   production: {

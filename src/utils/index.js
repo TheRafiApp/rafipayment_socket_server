@@ -7,8 +7,8 @@ const config = require('../config')[env]
 const log = console.log
 
 module.exports.ssl_options = () => {
-  const ssl = ['production', 'staging'].includes(env)
-  // const ssl = false
+  // const ssl = ['production', 'staging'].includes(env)
+  const ssl = false
 
   if (ssl) {
     log(chalk.green(`Using SSL for ${env}`))
