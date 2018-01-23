@@ -1,4 +1,8 @@
-const url = 'ws://localhost:4200'
+// const url = 'ws://localhost:4200'
+// const url = 'ws://ws.staging.rafipayment.com'
+const url = 'wss://ws.staging.rafipayment.com'
+// const url = 'ws://104.236.109.39:4200'
+// const url = 'wss://ws.development.rafipayment.com'
 
 window.onload = () => {
   const $console = document.querySelector('.console pre')
