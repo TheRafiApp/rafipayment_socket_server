@@ -7,8 +7,20 @@ const config = require('./config')[env]
 const http_pkg = require(config.http_package)
 const utils = require('./utils')
 
-const ssl_options = utils.ssl_options()
+// const ssl_options = utils.ssl_options()
 const format_obj = utils.format_object
+
+const handleReq = (req, res) => {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Request-Method', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
+  res.setHeader('Access-Control-Allow-Headers', '*')
+  if (req.method === 'OPTIONS') {
+    res.writeHead(200)
+    res.end()
+  }
+}
 
 const log = console.log
 
@@ -33,7 +45,8 @@ module.exports = class Server {
 
     this.port = options.port
     this.http = http_pkg
-      .createServer(ssl_options)
+      // .createServer(ssl_options)
+      .createServer(handleReq)
       .listen(this.port)
     this.server = new Engine(this.http)
 
