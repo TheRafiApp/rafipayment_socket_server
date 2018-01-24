@@ -1,37 +1,16 @@
-const env = process.env.NODE_ENV
-
+const http = require('http')
 const crypto = require('crypto')
 const chalk = require('chalk')
 const Engine = require('engine.io')
 
-const config = require('./config')[env]
-const http_pkg = require(config.http_package)
 const utils = require('./utils')
-
 const secret = require('../deployment_secret.json').key
-
-const ssl_options = utils.ssl_options()
-const format_obj = utils.format_object
-
-const handleReq = (req, res) => {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Request-Method', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
-  res.setHeader('Access-Control-Allow-Headers', '*')
-  if (req.method === 'OPTIONS') {
-    res.writeHead(200)
-    res.end()
-  }
-}
 
 const log = console.log
 
-log(config.http_package, ssl_options)
+const format_obj = utils.format_object
 
 const key = crypto.createHmac('sha256', secret).digest('hex')
-
-console.log(key)
 
 module.exports = class Server {
   constructor(options) {
@@ -53,9 +32,8 @@ module.exports = class Server {
     )
 
     this.port = options.port
-    this.http = http_pkg
-      // .createServer(ssl_options)
-      .createServer(handleReq)
+    this.http = http
+      .createServer(this.handleRequest)
       .listen(this.port)
     this.server = new Engine(this.http)
 
@@ -104,17 +82,35 @@ module.exports = class Server {
     )
   }
 
-  handleIncoming(_data, socket) {
-    this.sendMessage({
-      message: 'Data received!'
-    }, socket)
+  handleRequest(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Request-Method', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET')
+    res.setHeader('Access-Control-Allow-Headers', '*')
+    if (req.method === 'OPTIONS') {
+      res.writeHead(200)
+      res.end()
+    }
+  }
 
-    let data = JSON.parse(_data)
+  handleIncoming(_data, socket) {
+    const data = JSON.parse(_data)
+
     log(
       format_obj(data)
     )
 
-    this.sendToClients(data)
+    if (data.key === key) {
+      this.sendMessage({
+        message: 'Data received!'
+      }, socket)
+
+      this.sendToClients(data)
+    } else {
+      log(
+        chalk`{magenta Received data without correct key}`
+      )
+    }
   }
 
   sendToClients(data) {

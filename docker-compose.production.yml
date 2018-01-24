@@ -6,17 +6,11 @@ services:
     container_name: socket_server
     environment:
       - NODE_ENV=production
+      - FORCE_COLOR=1
     ports:
       - 4200:4200
-    volumes:
-      - rafipayment_certificate_data:/etc/letsencrypt
-
-volumes:
-  rafipayment_certificate_data:
-    external: true
 
 networks:
   default:
     external:
       name: rafipayment_network
-
