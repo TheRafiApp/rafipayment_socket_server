@@ -35,8 +35,6 @@ afterAll(() => {
   server.close()
 })
 
-// jest.setTimeout(10000)
-
 describe('Rafi websockets server', async () => {
   it('should fire the server open callback', async () => {
     expect.assertions(1)
@@ -64,12 +62,12 @@ describe('Rafi websockets server', async () => {
 
   it('client should receive a message from server', async () => {
     expect.assertions(1)
-    const data = JSON.stringify({
+    const data = {
       test: 'test'
-    })
+    }
     await server.sendToClients(data)
     await sleep(delay)
     expect(mockClientMessageCallback)
-      .toBeCalledWith(data)
+      .toBeCalledWith(JSON.stringify(data))
   })
 })

@@ -12,7 +12,8 @@
   "scripts": {
     "start": "node index.js",
     "demo": "browserify demo/client.js -o demo/client.min.js",
-    "test": "export NODE_ENV=test && jest"
+    "test": "export NODE_ENV=test && jest",
+    "testdeploy": "node demo/node_client.js"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
