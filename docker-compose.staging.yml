@@ -1,6 +1,6 @@
 version: "3.0"
 services:
-  sockets_server:
+  socket_server:
     build: .
     image: rafipayment_socket_server
     container_name: socket_server
