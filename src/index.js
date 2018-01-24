@@ -4,13 +4,16 @@ const chalk = require('chalk')
 const Engine = require('engine.io')
 
 const utils = require('./utils')
-const secret = require('../deployment_secret.json').key
+
+const key = process.env.NODE_ENV !== 'test'
+  ? crypto
+    .createHmac('sha256', require('../deployment_secret.json').key)
+    .digest('hex')
+  : null
 
 const log = console.log
 
 const format_obj = utils.format_object
-
-const key = crypto.createHmac('sha256', secret).digest('hex')
 
 module.exports = class Server {
   constructor(options) {
