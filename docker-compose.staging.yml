@@ -9,6 +9,9 @@ services:
       - FORCE_COLOR=1
     ports:
       - 4200:4200
+    deploy:
+      restart_policy:
+        condition: any
 
 networks:
   default:
